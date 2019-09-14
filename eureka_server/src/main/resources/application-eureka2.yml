@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: eureka
+server:
+  port: 8762
+eureka:
+  client:
+  #声明自己是个服务端
+    registerWithEureka: false
+    # 是否需要拉取服务信息
+    # fetchRegistry: false
+    serviceUrl:
+      #  配置的时候使用localhost，注册中心上注册的其他服务实例会被莫名地剔除,
+      #  可能的原因：配置的时候使用localhost,这个是不会发给网卡的（回环地址），服务之间是无法通过这个互相通讯
+      defaultZone: http://eureka1:8761/eureka/,http://eureka3:8763/eureka/
+  ## 心跳间隔，5秒
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    ## 没有心跳的淘汰时间，5秒
+    leaseExpirationDurationInSeconds: 5
+  server:
+    #  关闭自我保护模式
+    enable-self-preservation: false
+    ## 主动失效检测间隔,配置成5秒
+    evictionIntervalTimerInMs: 5000
+    ## 禁用readOnlyCacheMap
+    useReadOnlyResponseCache: false

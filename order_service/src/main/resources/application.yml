@@ -1,0 +1,63 @@
+server:
+  port: 8781
+#  指定项目名称
+#  servlet:
+#    context-path: /order
+
+
+#指定注册中心地址
+eureka:
+  client:
+    # 定时刷新本地缓存时间
+    registryFetchIntervalSeconds: 3
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/,http://localhost:8763/eureka/
+  # 心跳间隔，5秒
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    # 没有心跳的淘汰时间，5秒
+    leaseExpirationDurationInSeconds: 5
+
+#服务的名称
+spring:
+  application:
+    name: order-service
+    #  redis配置
+#  redis:
+#    database: 5
+#    host: 127.0.0.1
+#    port: 6379
+#    timeout: 2000
+
+#自定义负载均衡策略
+product-service:
+  ribbon:
+    #  权重
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+
+
+#修改调用超时时间
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 1000
+
+#设置超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+
+#暴露全部的监控信息
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

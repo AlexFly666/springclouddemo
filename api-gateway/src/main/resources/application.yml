@@ -1,0 +1,31 @@
+#服务的名称
+spring:
+  application:
+    name: api-gateway
+
+server:
+  port: 9000
+
+#指定注册中心地址
+eureka:
+  client:
+    # 定时刷新本地缓存时间
+    registryFetchIntervalSeconds: 3
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/,http://localhost:8763/eureka/
+  # 心跳间隔，5秒
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    # 没有心跳的淘汰时间，5秒
+    leaseExpirationDurationInSeconds: 5
+
+#自定义路由映射
+zuul:
+  routes:
+    order-service: /apigateway/order/**
+    product-service: /apigateway/product/**
+  #统一入口为上面的配置，其他入口忽略
+  ignored-patterns: /*-service/**
+  #处理http请求头为空的问题
+  sensitive-headers:
+
