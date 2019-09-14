@@ -58,5 +58,3 @@
     eureka.client.registryFetchIntervalSeconds+
     ribbon. ServerListRefreshInterval = 15秒
  ```
-
-
