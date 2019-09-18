@@ -53,7 +53,7 @@
     eureka.client.registryFetchIntervalSeconds+ribbon. ServerListRefreshInterval = 5秒
     
     异常下线客户端最大感知时间：
-    2*eureka.instance.leaseExpirationDurationInSeconds+
+    eureka.instance.leaseExpirationDurationInSeconds+
     eureka.server.evictionIntervalTimerInMs+
     eureka.client.registryFetchIntervalSeconds+
     ribbon. ServerListRefreshInterval = 15秒
